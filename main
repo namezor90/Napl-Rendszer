@@ -18,7 +18,21 @@ class Tanev:
     @staticmethod
     def tanev():
         return print(
-            f"Üdvözöllek a {AdatKezeles.adatok['metadata']['tanev']} tanév rendszerében, utoljára frissítve: {AdatKezeles.adatok['metadata']['utolso_frissites']}")
+            f"Üdvözöllek a {AdatKezeles.adatok['metadata']['tanev']} tanév rendszerében, "
+            f"utoljára frissítve: {AdatKezeles.adatok['metadata']['utolso_frissites']}")
+
+
+class Azonosito:
+    @staticmethod
+    def get_diak_nev(diak_id):
+        return AdatKezeles.adatok['diakok'][diak_id]['nev']
+
+    @staticmethod
+    def get_tantargy_nev(tantargy_id):
+        for tantargy_kulcs, tantargy_adat in AdatKezeles.adatok['tantargyak'].items():
+            if tantargy_adat['id'] == tantargy_id:
+                return tantargy_adat['nev']
+        return tantargy_id
 
 
 class Tanarok:
@@ -178,6 +192,7 @@ class Tantargyak:
 
 
 class Jegyek:
+
     @staticmethod
     def jegyek_listazasa():
         for jegy_id, jegy_adatok in AdatKezeles.adatok["jegyek"].items():
@@ -192,6 +207,207 @@ class Jegyek:
             print("-" * 30)
 
     @staticmethod
+    def list_diakok():
+        print("\nElérhető diákok:")
+        print("-" * 20)
+        for diak in AdatKezeles.adatok["diakok"].values():
+            print(f"- {diak['nev']}")
+
+    @staticmethod
+    def jegyek_listazasa_diak_szerint():
+        Jegyek.list_diakok()
+        nev = input("\nAdd meg a diák nevét: ")
+        volt_talalat = False
+
+        for diak_id, diak in AdatKezeles.adatok["diakok"].items():
+            if nev.lower() in diak['nev'].lower():
+                volt_talalat = True
+                print(f"\nDiák: {diak['nev']}")
+                print("-" * 20)
+                for jegy_id, jegy in AdatKezeles.adatok["jegyek"].items():
+                    if jegy['diak_id'] == diak_id:
+                        print(f"Tantárgy: {Azonosito.get_tantargy_nev(jegy['tantargy_id'])}")
+                        print(f"Érték: {jegy['ertek']}")
+                        print(f"Dátum: {jegy['datum']}")
+                        print(f"Típus: {jegy['tipus']}")
+                        print("-" * 15)
+
+        if not volt_talalat:
+            print("Nincs ilyen nevű diák!")
+
+    @staticmethod
+    def list_tantargyak():
+        print("\nElérhető tantárgyak:")
+        print("-" * 20)
+        for tantargy in AdatKezeles.adatok["tantargyak"].values():
+            print(f"- {tantargy['nev']}")
+
+    @staticmethod
+    def jegyek_listazasa_tantargy_szerint():
+        Jegyek.list_tantargyak()
+        tantargy = input("\nAdd meg a tantárgy nevét: ")
+        volt_talalat = False
+
+        for jegy_id, jegy in AdatKezeles.adatok["jegyek"].items():
+            if tantargy.lower() in Azonosito.get_tantargy_nev(jegy['tantargy_id']).lower():
+                diak = AdatKezeles.adatok["diakok"][jegy['diak_id']]
+                if not volt_talalat:
+                    print(f"\nTantárgy: {tantargy}")
+                    print("-" * 20)
+                volt_talalat = True
+                print(f"Diák: {diak['nev']}")
+                print(f"Érték: {jegy['ertek']}")
+                print(f"Dátum: {jegy['datum']}")
+                print(f"Típus: {jegy['tipus']}")
+                print("-" * 15)
+
+        if not volt_talalat:
+            print("Nincs ilyen tantárgyból jegy!")
+
+    @staticmethod
+    def atlagok_szamitasa():
+        print("\nÁtlagszámítás típusai:")
+        print("1. Diák átlaga tantárgyanként")
+        print("2. Osztály átlaga tantárgyanként")
+        print("3. Tantárgy átlaga")
+
+        valasztas = int(input("\nVálassz egy opciót: "))
+        match valasztas:
+            case 1:
+                Jegyek.diak_atlag()
+            case 2:
+                Jegyek.osztaly_atlag()
+            case 3:
+                Jegyek.tantargy_atlag()
+
+    @staticmethod
+    def diak_atlag():
+        Jegyek.list_diakok()
+        nev = input("\nAdd meg a diák nevét: ")
+        for diak_id, diak in AdatKezeles.adatok["diakok"].items():
+            if nev.lower() in diak['nev'].lower():
+                jegyek_tantargyankent = {}
+                for jegy in AdatKezeles.adatok["jegyek"].values():
+                    if jegy['diak_id'] == diak_id:
+                        tantargy = Azonosito.get_tantargy_nev(jegy['tantargy_id'])
+                        if tantargy not in jegyek_tantargyankent:
+                            jegyek_tantargyankent[tantargy] = []
+                        jegyek_tantargyankent[tantargy].append(jegy['ertek'])
+
+                print(f"\n{diak['nev']} átlagai:")
+                for tantargy, jegyek in jegyek_tantargyankent.items():
+                    atlag = sum(jegyek) / len(jegyek)
+                    print(f"{tantargy}: {atlag:.2f}")
+
+    @staticmethod
+    def osztaly_atlag():
+        for osztaly_id, osztaly in AdatKezeles.adatok["osztalyok"].items():
+            print(f"\n{osztaly_id} osztály átlagai:")
+            for tantargy in osztaly['tantargyak']:
+                jegyek = []
+                for diak_id in osztaly['diak_ids']:
+                    for jegy in AdatKezeles.adatok["jegyek"].values():
+                        if jegy['diak_id'] == diak_id and Azonosito.get_tantargy_nev(jegy['tantargy_id']) == tantargy:
+                            jegyek.append(jegy['ertek'])
+                if jegyek:
+                    atlag = sum(jegyek) / len(jegyek)
+                    print(f"{tantargy}: {atlag:.2f}")
+
+    @staticmethod
+    def tantargy_atlag():
+        Jegyek.list_tantargyak()
+        tantargy = input("\nAdd meg a tantárgy nevét: ")
+        jegyek = []
+        for jegy in AdatKezeles.adatok["jegyek"].values():
+            if tantargy.lower() in Azonosito.get_tantargy_nev(jegy['tantargy_id']).lower():
+                jegyek.append(jegy['ertek'])
+
+        if jegyek:
+            atlag = sum(jegyek) / len(jegyek)
+            print(f"\n{tantargy} átlaga: {atlag:.2f}")
+        else:
+            print("Nincs ilyen tantárgy vagy nincs hozzá jegy!")
+
+    @staticmethod
+    def jegy_beirasa():
+        # Diák kiválasztása
+        Jegyek.list_diakok()
+        diak_nev = input("\nAdd meg a diák nevét: ")
+
+        # Diák ID keresése
+        diak_id = None
+        for d_id, diak in AdatKezeles.adatok["diakok"].items():
+            if diak_nev.lower() in diak['nev'].lower():
+                diak_id = d_id
+                print(f"\nKiválasztott diák: {diak['nev']}")
+                break
+
+        if not diak_id:
+            print("Nincs ilyen diák!")
+            return
+
+        # Tantárgy kiválasztása az osztály tantárgyai közül
+        diak_osztaly = AdatKezeles.adatok["diakok"][diak_id]["osztaly_id"]
+        print("\nVálasztható tantárgyak:")
+        for tantargy, adatok in AdatKezeles.adatok["osztalyok"][diak_osztaly]["tantargyak"].items():
+            tanar = AdatKezeles.adatok["tanarok"][adatok["tanar_id"]]["nev"]
+            print(f"- {tantargy} (Tanár: {tanar})")
+
+        tantargy = input("\nAdd meg a tantárgy nevét: ")
+
+        # Tantárgy ID keresése
+        tantargy_id = None
+        for t_adat in AdatKezeles.adatok["tantargyak"].values():
+            if tantargy.lower() == t_adat['nev'].lower():
+                tantargy_id = t_adat['id']
+                break
+
+        if not tantargy_id:
+            print("Nincs ilyen tantárgy!")
+            return
+
+        # Jegy adatainak bekérése
+        try:
+            ertek = int(input("Add meg a jegyet (1-5): "))
+            if ertek not in range(1, 6):
+                print("Érvénytelen jegy!")
+                return
+        except ValueError:
+            print("Érvénytelen érték!")
+            return
+
+        datum = input("Add meg a dátumot (ÉÉÉÉ-HH-NN): ")
+        print("\nLehetséges típusok: dolgozat, felelet, gyakorlati, projektmunka")
+        tipus = input("Add meg a típust: ")
+        tema = input("Add meg a témát: ")
+        megjegyzes = input("Megjegyzés (opcionális): ")
+
+        # Tanár ID meghatározása az osztály adataiból
+        tanar_id = AdatKezeles.adatok["osztalyok"][diak_osztaly]["tantargyak"][tantargy]["tanar_id"]
+
+        # Új jegy ID generálása
+        uj_id = f"J{len(AdatKezeles.adatok['jegyek']) + 1:03d}"
+
+        # Jegy összeállítása
+        uj_jegy = {
+            "id": uj_id,
+            "diak_id": diak_id,
+            "tantargy_id": tantargy_id,
+            "ertek": ertek,
+            "datum": datum,
+            "tipus": tipus,
+            "tanar_id": tanar_id,
+            "tema": tema
+        }
+
+        if megjegyzes:
+            uj_jegy["megjegyzes"] = megjegyzes
+
+        # Jegy mentése
+        AdatKezeles.adatok["jegyek"][uj_id] = uj_jegy
+        print("\nJegy sikeresen beírva!")
+
+    @staticmethod
     def jegyek_menu():
         print('----------------------------------------------')
         print('Jegy kezelés!')
@@ -199,19 +415,22 @@ class Jegyek:
         print('2. Jegyek Listázása Diákonként.')
         print('3. Jegyek Listázása Tantárgyanként.')
         print('4. Átlagok Számítása.')
-        print('5. Vissza a főmenübe')
+        print('5. Összes Jegyek Listázása')
+        print('6. Vissza a főmenübe')
 
         valasztott = int(input('Kérlek válassz a menüpontok közül: '))
         match valasztott:
             case 1:
-                Jegyek.jegyek_listazasa()
+                Jegyek.jegy_beirasa()
             case 2:
-                pass
+                Jegyek.jegyek_listazasa_diak_szerint()
             case 3:
-                pass
+                Jegyek.jegyek_listazasa_tantargy_szerint()
             case 4:
-                pass
+                Jegyek.atlagok_szamitasa()
             case 5:
+                Jegyek.jegyek_listazasa()
+            case 6:
                 return
 
 
