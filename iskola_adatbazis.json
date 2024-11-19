@@ -1,0 +1,522 @@
+{
+  "metadata": {
+    "tanev": "2023/2024",
+    "utolso_frissites": "2024-01-16"
+  },
+  "tanarok": {
+    "T001": {
+      "id": "T001",
+      "nev": "Kiss János",
+      "tantargyak": ["matematika"],
+      "osztalyfonok": "9.A",
+      "tanitott_osztalyok": ["9.A", "10.B"],
+      "szuletesi_datum": "1975-08-15",
+      "telefonszam": "+36201234567",
+      "vegzettseg": "matematika-fizika szakos tanár",
+      "email": "kiss.janos@iskola.hu"
+    },
+    "T002": {
+      "id": "T002",
+      "nev": "Nagy Éva",
+      "tantargyak": ["magyar"],
+      "osztalyfonok": "10.B",
+      "tanitott_osztalyok": ["9.A", "10.B", "11.A"],
+      "szuletesi_datum": "1980-03-22",
+      "telefonszam": "+36202345678",
+      "vegzettseg": "magyar-történelem szakos tanár",
+      "email": "nagy.eva@iskola.hu"
+    },
+    "T003": {
+      "id": "T003",
+      "nev": "Kovács Péter",
+      "tantargyak": ["fizika", "informatika"],
+      "tanitott_osztalyok": ["9.A", "10.B", "11.A"],
+      "szuletesi_datum": "1982-11-30",
+      "telefonszam": "+36203456789",
+      "vegzettseg": "fizika-informatika szakos tanár",
+      "email": "kovacs.peter@iskola.hu"
+    },
+    "T004": {
+      "id": "T004",
+      "nev": "Horváth Béla",
+      "szuletesi_datum": "1965-03-05",
+      "telefonszam": "+36206969696",
+      "vegzettseg": "Hajléktalan",
+      "tantargyak": [],
+      "email": "pinter.tamas@iskola.hu"
+    },
+    "T005": {
+      "id": "T005",
+      "nev": "Keresztes Julia",
+      "szuletesi_datum": "1990-02-07",
+      "telefonszam": "+362045684758",
+      "vegzettseg": "Informatika",
+      "tantargyak": ["informatika"],
+      "tanitott_osztalyok": ["9.A", "10.B", "11.A"],
+      "email": "ban.otto@iskola.hu"
+    },
+    "T006": {
+      "id": "T006",
+      "nev": "Szabó Mária",
+      "tantargyak": ["angol", "német"],
+      "osztalyfonok": "11.A",
+      "tanitott_osztalyok": ["9.A", "10.B", "11.A"],
+      "szuletesi_datum": "1978-06-14",
+      "telefonszam": "+36204567890",
+      "vegzettseg": "angol-német szakos tanár",
+      "email": "szabo.maria@iskola.hu"
+    },
+    "T007": {
+      "id": "T007",
+      "nev": "Varga István",
+      "tantargyak": ["történelem", "földrajz"],
+      "tanitott_osztalyok": ["9.A", "10.B", "11.A"],
+      "szuletesi_datum": "1973-09-28",
+      "telefonszam": "+36205678901",
+      "vegzettseg": "történelem-földrajz szakos tanár",
+      "email": "varga.istvan@iskola.hu"
+    }
+  },
+  "osztalyok": {
+    "9.A": {
+      "id": "9.A",
+      "osztalyfonok_id": "T001",
+      "letszam": 28,
+      "diak_ids": ["D001", "D002", "D003", "D004", "D005"],
+      "tantargyak": {
+        "matematika": {
+          "tanar_id": "T001",
+          "heti_oraszam": 4
+        },
+        "magyar": {
+          "tanar_id": "T002",
+          "heti_oraszam": 4
+        },
+        "fizika": {
+          "tanar_id": "T003",
+          "heti_oraszam": 2
+        },
+        "angol": {
+          "tanar_id": "T006",
+          "heti_oraszam": 4
+        },
+        "történelem": {
+          "tanar_id": "T007",
+          "heti_oraszam": 3
+        },
+        "informatika": {
+          "tanar_id": "T005",
+          "heti_oraszam": 2
+        }
+      },
+      "orarend": {
+        "hetfo": ["matematika", "magyar", "fizika", "angol"],
+        "kedd": ["magyar", "matematika", "angol", "történelem"],
+        "szerda": ["fizika", "informatika", "matematika", "történelem"],
+        "csutortok": ["angol", "magyar", "matematika", "informatika"],
+        "pentek": ["történelem", "angol", "magyar", "matematika"]
+      }
+    },
+    "10.B": {
+      "id": "10.B",
+      "osztalyfonok_id": "T002",
+      "letszam": 25,
+      "diak_ids": ["D006", "D007", "D008", "D009", "D010"],
+      "tantargyak": {
+        "matematika": {
+          "tanar_id": "T001",
+          "heti_oraszam": 4
+        },
+        "magyar": {
+          "tanar_id": "T002",
+          "heti_oraszam": 4
+        },
+        "fizika": {
+          "tanar_id": "T003",
+          "heti_oraszam": 2
+        },
+        "angol": {
+          "tanar_id": "T006",
+          "heti_oraszam": 4
+        },
+        "történelem": {
+          "tanar_id": "T007",
+          "heti_oraszam": 3
+        }
+      },
+      "orarend": {
+        "hetfo": ["angol", "matematika", "magyar", "történelem"],
+        "kedd": ["magyar", "fizika", "matematika", "angol"],
+        "szerda": ["történelem", "magyar", "matematika", "angol"],
+        "csutortok": ["matematika", "történelem", "magyar", "fizika"],
+        "pentek": ["angol", "magyar", "matematika", "történelem"]
+      }
+    },
+    "11.A": {
+      "id": "11.A",
+      "osztalyfonok_id": "T006",
+      "letszam": 26,
+      "diak_ids": ["D011", "D012", "D013", "D014", "D015"],
+      "tantargyak": {
+        "matematika": {
+          "tanar_id": "T001",
+          "heti_oraszam": 5
+        },
+        "magyar": {
+          "tanar_id": "T002",
+          "heti_oraszam": 4
+        },
+        "fizika": {
+          "tanar_id": "T003",
+          "heti_oraszam": 3
+        },
+        "angol": {
+          "tanar_id": "T006",
+          "heti_oraszam": 5
+        },
+        "történelem": {
+          "tanar_id": "T007",
+          "heti_oraszam": 4
+        }
+      },
+      "orarend": {
+        "hetfo": ["matematika", "angol", "magyar", "történelem", "fizika"],
+        "kedd": ["angol", "matematika", "történelem", "magyar", "fizika"],
+        "szerda": ["magyar", "történelem", "matematika", "angol", "fizika"],
+        "csutortok": ["matematika", "angol", "történelem", "magyar"],
+        "pentek": ["angol", "matematika", "magyar", "történelem"]
+      }
+    }
+  },
+  "diakok": {
+    "D001": {
+      "id": "D001",
+      "nev": "Kiss Pista",
+      "szuletesi_datum": "2008-05-15",
+      "telefonszam": "+36301234567",
+      "lakcim": "Budapest, Petőfi u. 1.",
+      "osztaly_id": "9.A",
+      "szulok": {
+        "anya": {
+          "nev": "Kiss Márta",
+          "telefonszam": "+36201234567",
+          "email": "kiss.marta@email.com"
+        },
+        "apa": {
+          "nev": "Kiss József",
+          "telefonszam": "+36701234567",
+          "email": "kiss.jozsef@email.com"
+        }
+      },
+      "hianyzasok": {
+        "igazolt": 12,
+        "igazolatlan": 0
+      },
+      "email": "kiss.pista@diak.iskola.hu"
+    },
+    "D002": {
+      "id": "D002",
+      "nev": "Nagy Anna",
+      "szuletesi_datum": "2008-03-20",
+      "telefonszam": "+36302222222",
+      "lakcim": "Budapest, Kossuth u. 2.",
+      "osztaly_id": "9.A",
+      "szulok": {
+        "anya": {
+          "nev": "Nagy Katalin",
+          "telefonszam": "+36202222222",
+          "email": "nagy.katalin@email.com"
+        },
+        "apa": {
+          "nev": "Nagy Péter",
+          "telefonszam": "+36702222222",
+          "email": "nagy.peter@email.com"
+        }
+      },
+      "hianyzasok": {
+        "igazolt": 8,
+        "igazolatlan": 1
+      },
+      "email": "nagy.anna@diak.iskola.hu"
+    },
+    "D003": {
+      "id": "D003",
+      "nev": "Kovács Béla",
+      "szuletesi_datum": "2008-07-12",
+      "telefonszam": "+36303333333",
+      "lakcim": "Budapest, Arany János u. 3.",
+      "osztaly_id": "9.A",
+      "szulok": {
+        "anya": {
+          "nev": "Kovács Andrea",
+          "telefonszam": "+36203333333",
+          "email": "kovacs.andrea@email.com"
+        },
+        "apa": {
+          "nev": "Kovács Zoltán",
+          "telefonszam": "+36703333333",
+          "email": "kovacs.zoltan@email.com"
+        }
+      },
+      "hianyzasok": {
+        "igazolt": 5,
+        "igazolatlan": 2
+      },
+      "email": "kovacs.bela@diak.iskola.hu"
+    },
+    "D004": {
+      "id": "D004",
+      "nev": "Szabó Emma",
+      "szuletesi_datum": "2008-09-30",
+      "telefonszam": "+36304444444",
+      "lakcim": "Budapest, Váci út 15.",
+      "osztaly_id": "9.A",
+      "szulok": {
+        "anya": {
+          "nev": "Szabó Éva",
+          "telefonszam": "+36204444444",
+          "email": "szabo.eva@email.com"
+        }
+      },
+      "hianyzasok": {
+        "igazolt": 3,
+        "igazolatlan": 0
+      },
+      "email": "szabo.emma@diak.iskola.hu"
+    },
+    "D005": {
+      "id": "D005",
+      "nev": "Tóth Márk",
+      "szuletesi_datum": "2008-11-05",
+      "telefonszam": "+36305555555",
+      "lakcim": "Budapest, Bartók Béla út 20.",
+      "osztaly_id": "9.A",
+      "szulok": {
+        "anya": {
+          "nev": "Tóth Eszter",
+          "telefonszam": "+36205555555",
+          "email": "toth.eszter@email.com"
+        },
+        "apa": {
+          "nev": "Tóth Gábor",
+          "telefonszam": "+36705555555",
+          "email": "toth.gabor@email.com"
+        }
+      },
+      "hianyzasok": {
+        "igazolt": 15,
+        "igazolatlan": 3
+      },
+      "email": "toth.mark@diak.iskola.hu"
+    }
+  },
+  "tantargyak": {
+    "matematika": {
+      "id": "M001",
+      "nev": "matematika",
+      "alap_heti_oraszam": 4,
+      "evfolyamok": [9, 10, 11, 12],
+      "kovetelmeny": "közép/emelt szint",
+      "leiras": "Matematikai alapismeretek, algebra, geometria",
+      "tematika": {
+        "9": ["Halmazok", "Algebra", "Függvények", "Geometria"],
+        "10": ["Másodfokú függvények", "Geometria", "Statisztika"],
+        "11": ["Hatvány, gyök", "Exponenciális függvények", "Trigonometria"],
+        "12": ["Valószínűségszámítás", "Térgeometria", "Rendszerező összefoglalás"]
+      }
+    },
+    "magyar": {
+      "id": "M002",
+      "nev": "magyar",
+      "alap_heti_oraszam": 4,
+      "evfolyamok": [9, 10, 11, 12],
+      "kovetelmeny": "közép szint",
+      "leiras": "Irodalom és nyelvtan",
+      "tematika": {
+        "9": ["Művészeti korok", "Antikvitás", "Nyelvtani alapok"],
+        "10": ["Régi magyar irodalom", "Romantika", "Szövegalkotás"],
+        "11": ["Nyugat nemzedékei", "Modern irodalom", "Nyelvhelyesség"],
+        "12": ["Kortárs irodalom", "Nyelvtani rendszerezés", "Érettségi felkészítés"]
+      }
+    },
+    "angol": {
+      "id": "M003",
+      "nev": "angol",
+      "alap_heti_oraszam": 4,
+      "evfolyamok": [9, 10, 11, 12],
+      "kovetelmeny": "közép/emelt szint",
+      "leiras": "Angol nyelvi készségek fejlesztése",
+      "tematika": {
+        "9": ["Alapvető nyelvtani szerkezetek", "Mindennapi szituációk", "Alapszókincs bővítése"],
+        "10": ["Összetett nyelvtani szerkezetek", "Kommunikációs készségek", "Kulturális ismeretek"],
+        "11": ["Üzleti angol alapok", "Irodalmi szövegek", "Nyelvi készségek fejlesztése"],
+        "12": ["Érettségi felkészítés", "Szaknyelvi alapok", "Komplex nyelvhasználat"]
+      }
+    },
+    "fizika": {
+      "id": "M004",
+      "nev": "fizika",
+      "alap_heti_oraszam": 2,
+      "evfolyamok": [9, 10, 11],
+      "kovetelmeny": "közép szint",
+      "leiras": "Természettudományos alapismeretek, fizikai törvények",
+      "tematika": {
+        "9": ["Kinematika", "Dinamika", "Energia"],
+        "10": ["Hőtan", "Elektromosság", "Mágnesesség"],
+        "11": ["Atomfizika", "Magfizika", "Csillagászat"]
+      }
+    },
+    "történelem": {
+      "id": "M005",
+      "nev": "történelem",
+      "alap_heti_oraszam": 3,
+      "evfolyamok": [9, 10, 11, 12],
+      "kovetelmeny": "közép/emelt szint",
+      "leiras": "Történelmi események, összefüggések megismerése",
+      "tematika": {
+        "9": ["Őskor", "Ókor", "Középkor kezdete"],
+        "10": ["Középkor", "Kora újkor", "Felvilágosodás"],
+        "11": ["XIX. század", "XX. század első fele", "Magyarország története"],
+        "12": ["XX. század második fele", "Jelenkor", "Érettségi felkészítés"]
+      }
+    },
+    "informatika": {
+      "id": "M006",
+      "nev": "informatika",
+      "alap_heti_oraszam": 2,
+      "evfolyamok": [9, 10],
+      "kovetelmeny": "közép szint",
+      "leiras": "Számítástechnikai és informatikai alapismeretek",
+      "tematika": {
+        "9": ["Számítógépes alapismeretek", "Szövegszerkesztés", "Internet használat"],
+        "10": ["Táblázatkezelés", "Prezentációkészítés", "Adatbázis-kezelés alapjai"]
+      }
+    }
+  },
+  "jegyek": {
+    "J001": {
+      "id": "J001",
+      "diak_id": "D001",
+      "tantargy_id": "M001",
+      "ertek": 5,
+      "datum": "2024-01-15",
+      "tipus": "dolgozat",
+      "tanar_id": "T001",
+      "tema": "Másodfokú egyenletek",
+      "megjegyzes": "Kiváló munka!"
+    },
+    "J002": {
+      "id": "J002",
+      "diak_id": "D001",
+      "tantargy_id": "M002",
+      "ertek": 4,
+      "datum": "2024-01-16",
+      "tipus": "felelet",
+      "tanar_id": "T002",
+      "tema": "Petőfi Sándor költészete"
+    },
+    "J003": {
+      "id": "J003",
+      "diak_id": "D002",
+      "tantargy_id": "M003",
+      "ertek": 5,
+      "datum": "2024-01-17",
+      "tipus": "dolgozat",
+      "tanar_id": "T006",
+      "tema": "Present Perfect",
+      "megjegyzes": "Excellent work!"
+    },
+    "J004": {
+      "id": "J004",
+      "diak_id": "D003",
+      "tantargy_id": "M004",
+      "ertek": 4,
+      "datum": "2024-01-18",
+      "tipus": "gyakorlati",
+      "tanar_id": "T003",
+      "tema": "Mechanikai mérések",
+      "megjegyzes": "Pontos mérések"
+    },
+    "J005": {
+      "id": "J005",
+      "diak_id": "D004",
+      "tantargy_id": "M005",
+      "ertek": 5,
+      "datum": "2024-01-19",
+      "tipus": "projektmunka",
+      "tanar_id": "T007",
+      "tema": "Reformkor",
+      "megjegyzes": "Kiváló prezentáció"
+    }
+  },
+  "statisztikak": {
+    "tantargyi_atlagok": {
+      "D001": {
+        "matematika": {
+          "atlag": 4.5,
+          "jegyek_szama": 4,
+          "utolso_jegy_datum": "2024-01-15"
+        },
+        "magyar": {
+          "atlag": 4.0,
+          "jegyek_szama": 3,
+          "utolso_jegy_datum": "2024-01-16"
+        },
+        "angol": {
+          "atlag": 4.3,
+          "jegyek_szama": 3,
+          "utolso_jegy_datum": "2024-01-10"
+        }
+      },
+      "D002": {
+        "matematika": {
+          "atlag": 5.0,
+          "jegyek_szama": 3,
+          "utolso_jegy_datum": "2024-01-10"
+        },
+        "angol": {
+          "atlag": 5.0,
+          "jegyek_szama": 2,
+          "utolso_jegy_datum": "2024-01-17"
+        }
+      },
+      "D003": {
+        "fizika": {
+          "atlag": 4.0,
+          "jegyek_szama": 2,
+          "utolso_jegy_datum": "2024-01-18"
+        }
+      },
+      "D004": {
+        "történelem": {
+          "atlag": 5.0,
+          "jegyek_szama": 1,
+          "utolso_jegy_datum": "2024-01-19"
+        }
+      }
+    },
+    "osztaly_atlagok": {
+      "9.A": {
+        "matematika": 4.6,
+        "magyar": 4.2,
+        "angol": 4.5,
+        "fizika": 4.0,
+        "történelem": 4.8
+      },
+      "10.B": {
+        "matematika": 4.2,
+        "magyar": 3.9,
+        "angol": 4.3,
+        "fizika": 3.8,
+        "történelem": 4.1
+      },
+      "11.A": {
+        "matematika": 4.4,
+        "magyar": 4.1,
+        "angol": 4.6,
+        "fizika": 4.2,
+        "történelem": 4.3
+      }
+    }
+  }
+}
