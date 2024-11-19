@@ -1,0 +1,247 @@
+import json
+
+
+class AdatKezeles:
+    adatok = {}
+    ADATBAZIS_FAJL = "iskola_adatbazis.json"
+
+    @staticmethod
+    def adatok_betoltese():
+        with open(AdatKezeles.ADATBAZIS_FAJL, "r", encoding="utf-8") as f:
+            AdatKezeles.adatok = json.load(f)
+
+
+AdatKezeles.adatok_betoltese()
+
+
+class Tanev:
+    @staticmethod
+    def tanev():
+        return print(
+            f"Üdvözöllek a {AdatKezeles.adatok['metadata']['tanev']} tanév rendszerében, utoljára frissítve: {AdatKezeles.adatok['metadata']['utolso_frissites']}")
+
+
+class Tanarok:
+    @staticmethod
+    def tanarok_listazasa():
+        for tanar_id, tanar_adatok in AdatKezeles.adatok["tanarok"].items():
+            print(f"Név: {tanar_adatok['nev']}")
+            print(f"Tantárgyak: {', '.join(tanar_adatok['tantargyak'])}")
+            if 'tanitott_osztalyok' in tanar_adatok:
+                print(f"Tanított osztályok: {', '.join(tanar_adatok['tanitott_osztalyok'])}")
+            print(f"Végzettség: {tanar_adatok['vegzettseg']}")
+            print("-" * 20)
+
+    @staticmethod
+    def tanar_menu():
+        print('----------------------------------------------')
+        print('Tanárok Kezelése!')
+        print('1. Új Tanár Felvétele.')
+        print('2. Tanár Törlése.')
+        print('3. Tanár Listázása.')
+        print('4. Tanár Keresése.')
+        print('5. Vissza a főmenübe')
+
+        valasztott = int(input('Kérlek válassz a menüpontok közül: '))
+        match valasztott:
+            case 1:
+                Tanarok.tanarok_listazasa()
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                return
+
+
+class Diakok:
+    @staticmethod
+    def diakok_listazasa():
+        for diak_id, diak_adatok in AdatKezeles.adatok["diakok"].items():
+            print(f"Név: {diak_adatok['nev']}")
+            print(f"Osztály: {diak_adatok['osztaly_id']}")
+            print(f"Születési dátum: {diak_adatok['szuletesi_datum']}")
+            print(f"Lakcím: {diak_adatok['lakcim']}")
+            print("Szülők:")
+            print(f"Anya: {diak_adatok['szulok']['anya']['nev']}")
+            print(f"Tel: {diak_adatok['szulok']['anya']['telefonszam']}")
+            if 'apa' in diak_adatok['szulok']:
+                print(f"Apa: {diak_adatok['szulok']['apa']['nev']}")
+                print(f"Tel: {diak_adatok['szulok']['apa']['telefonszam']}")
+            print(f"Hiányzások:")
+            print(f"Igazolt: {diak_adatok['hianyzasok']['igazolt']}")
+            print(f"Igazolatlan: {diak_adatok['hianyzasok']['igazolatlan']}")
+            print("-" * 20)
+
+    @staticmethod
+    def diak_menu():
+        print('----------------------------------------------')
+        print('Diákok Kezelése!')
+        print('1. Új Diák Felvétele.')
+        print('2. Diák Adatainak Módosítása.')
+        print('3. Diák Törlése.')
+        print('4. Diák Listázása.')
+        print('5. Diák Keresése.')
+        print('6. Vissza a főmenübe')
+
+        valasztott = int(input('Kérlek válassz a menüpontok közül: '))
+        match valasztott:
+            case 1:
+                Diakok.diakok_listazasa()
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                pass
+            case 6:
+                return
+
+
+class Osztalyok:
+    @staticmethod
+    def osztalyok_listazasa():
+        for osztaly_id, osztaly_adatok in AdatKezeles.adatok["osztalyok"].items():
+            print(f"Osztály: {osztaly_adatok['id']}")
+            print(f"Osztályfőnök ID: {osztaly_adatok['osztalyfonok_id']}")
+            print(f"Létszám: {osztaly_adatok['letszam']}")
+            print("\nTantárgyak és óraszámok:")
+            for tantargy, adatok in osztaly_adatok['tantargyak'].items():
+                print(f"  {tantargy}: {adatok['heti_oraszam']} óra (Tanár ID: {adatok['tanar_id']})")
+            print("\nÓrarend:")
+            for nap, orak in osztaly_adatok['orarend'].items():
+                print(f"  {nap}: {', '.join(orak)}")
+            print("-" * 50)
+
+    @staticmethod
+    def osztalyok_menu():
+        print('----------------------------------------------')
+        print('Osztályok Kezelése!')
+        print('1. Új Osztály Létrehozása.')
+        print('2. Osztályfőnök Hozzárendelés.')
+        print('3. Diák Hozzáadása Osztályhoz.')
+        print('4. Osztályok Listázása.')
+        print('5. Osztály Adatainak Módosítása.')
+        print('6. Vissza a főmenübe')
+
+        valasztott = int(input('Kérlek válassz a menüpontok közül: '))
+        match valasztott:
+            case 1:
+                Osztalyok.osztalyok_listazasa()
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                pass
+            case 6:
+                return
+
+
+class Tantargyak:
+    @staticmethod
+    def tantargyak_listazasa():
+        for tantargy_id, tantargy_adatok in AdatKezeles.adatok["tantargyak"].items():
+            print(f"Tantárgy: {tantargy_adatok['nev']}")
+            print(f"Óraszám: {tantargy_adatok['alap_heti_oraszam']}")
+            print(f"Évfolyamok: {tantargy_adatok['evfolyamok']}")
+            print("-" * 20)
+
+    @staticmethod
+    def tantargyak_menu():
+        print('----------------------------------------------')
+        print('Tantárgy kezelés!')
+        print('1. Új Tantárgy Felvétele.')
+        print('2. Tantárgy hozzárendelése tanárhoz.')
+        print('3. Tantárgyak Listázása.')
+        print('4. Tantárgy Törlése.')
+        print('5. Vissza a főmenübe')
+
+        valasztott = int(input('Kérlek válassz a menüpontok közül: '))
+        match valasztott:
+            case 1:
+                Tantargyak.tantargyak_listazasa()
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                return
+
+
+class Jegyek:
+    @staticmethod
+    def jegyek_listazasa():
+        for jegy_id, jegy_adatok in AdatKezeles.adatok["jegyek"].items():
+            print(f"Diák ID: {jegy_adatok['diak_id']}")
+            print(f"Tantárgy ID: {jegy_adatok['tantargy_id']}")
+            print(f"Érték: {jegy_adatok['ertek']}")
+            print(f"Dátum: {jegy_adatok['datum']}")
+            print(f"Típus: {jegy_adatok['tipus']}")
+            print(f"Téma: {jegy_adatok['tema']}")
+            if 'megjegyzes' in jegy_adatok:
+                print(f"Megjegyzés: {jegy_adatok['megjegyzes']}")
+            print("-" * 30)
+
+    @staticmethod
+    def jegyek_menu():
+        print('----------------------------------------------')
+        print('Jegy kezelés!')
+        print('1. Jegyek Beírása.')
+        print('2. Jegyek Listázása Diákonként.')
+        print('3. Jegyek Listázása Tantárgyanként.')
+        print('4. Átlagok Számítása.')
+        print('5. Vissza a főmenübe')
+
+        valasztott = int(input('Kérlek válassz a menüpontok közül: '))
+        match valasztott:
+            case 1:
+                Jegyek.jegyek_listazasa()
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                return
+
+
+while True:
+    print('\nOsztály Napló Rendszer!')
+    Tanev.tanev()
+    print('1. Tanárok Kezelése.')
+    print('2. Diákok kezelése.')
+    print('3. Osztályok kezelése.')
+    print('4. Tantárgyak kezelése.')
+    print('5. Jegyek kezelése.')
+    print('6. Kilépés')
+
+    try:
+        valasztott = int(input('Kérlek válassz a menüpontok közül: '))
+        match valasztott:
+            case 1:
+                Tanarok.tanar_menu()
+            case 2:
+                Diakok.diak_menu()
+            case 3:
+                Osztalyok.osztalyok_menu()
+            case 4:
+                Tantargyak.tantargyak_menu()
+            case 5:
+                Jegyek.jegyek_menu()
+            case 6:
+                print("Viszlát!")
+                break
+            case _:
+                print("Érvénytelen választás!")
+    except ValueError:
+        print("Kérlek számot adj meg!")
